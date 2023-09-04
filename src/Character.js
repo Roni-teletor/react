@@ -9,7 +9,7 @@ const Character = () => {
     `https://rickandmortyapi.com/api/character/?page=${page}`,
     fetcher
   );
-  const [imageLoaded, setImageLoaded] = useState(true);
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <>
@@ -26,21 +26,19 @@ const Character = () => {
                     key={characters?.id}
                     className="h-[300px] justify-start items-center flex-col  flex max-w-sm"
                   >
-                    {imageLoaded ? <Skeleton /> : 
-                    <>
+                    
                     <div className="w-[289px] h-[230px] flex">
-                      <img
-                        onLoad={() => setImageLoaded(true)}
-                        className="w-[289px] h-[230px]  border border-blue-800  mr-5 rounded-full rounded-lg bg-rose-100/10"
-                        src={characters.image}
-                        alt={characters.name}
-                        loading="lazy"
-                      />
+                      {!loaded && 
+                <Skeleton />
+            }
+            <img
+                className={`w-[289px] h-[230px] rounded-lg border border-blue-800 mr-5 ${loaded ? <Skeleton /> : 'opacity-0'}`}
+                src={characters.image}
+                alt={characters.name}
+                loading="lazy"
+                onLoad={() => setLoaded(true)}
+            />
                     </div>
-                    </>
-                    }
-                    
-                    
                     <div>
                       <h1>{characters.name}</h1>
                       <button className="text-white bg-blue-600 w-20 h-10 rounded-md">
@@ -52,7 +50,7 @@ const Character = () => {
               );
             })}
           </div>
-          <div className="w-[100%] flex justify-evenly justify-center items-center h-[100px]">
+          <div className="w-[100%] flex  justify-center items-center h-[100px]">
             <button
               onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
               disabled={page === 1}
