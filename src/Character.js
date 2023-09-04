@@ -31,7 +31,7 @@ const Character = () => {
                     <div className="w-[289px] h-[230px] flex">
                       <img
                         onLoad={() => setImageLoaded(true)}
-                        className="w-[289px] h-[230px] rounded-lg border border-blue-800  mr-5 rounded-full rounded-lg bg-rose-100/10"
+                        className="w-[289px] h-[230px]  border border-blue-800  mr-5 rounded-full rounded-lg bg-rose-100/10"
                         src={characters.image}
                         alt={characters.name}
                         loading="lazy"
